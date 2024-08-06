@@ -1,0 +1,16 @@
+services:
+  user-service-api:
+    container_name: user-service
+    image: nestjs-user-service
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - ${PORT}:${PORT}
+    env_file:
+      - .env
+    command: node dist/main.js
